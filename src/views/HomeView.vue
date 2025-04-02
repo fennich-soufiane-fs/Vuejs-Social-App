@@ -1,9 +1,10 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { useCounterStore } from '../stores/commonStore.js'
+const store = useCounterStore()
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1 class="text-3xl font-bold underline">{{store.test}}</h1>
   </main>
 </template>
