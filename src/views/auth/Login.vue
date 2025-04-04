@@ -1,9 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { toast } from 'vue3-toastify';
+import { toast } from 'vue3-toastify'
 import { useRouter } from 'vue-router'
 import { login } from '@/services/auth_service'
+import { useAuthStore } from '@/stores/AuthStore'
 
+const authStore = useAuthStore()
+const router = useRouter()
 const user = reactive({
   email: '',
   password: '',
@@ -13,12 +16,24 @@ const errors = ref({})
 const handleLogin = async () => {
   try {
     const response = await login(user)
-    toast.success('Logging successfully!')
-    user.email = ''
-    user.password = ''
+    console.log(response)
+    if (response?.data?.user && response?.data?.access_token) {
+      authStore?.setUser(response?.data?.user)
+      authStore?.setToken(response.data.access_token)
+      toast.success('Logging successfully!')
+      router.push('/timeline')
+      user.email = ''
+      user.password = ''
+    }
   } catch (error) {
-    errors.value = error.response.data.errors
-    console.log(error)
+    if (error?.response?.data?.errors) {
+      errors.value = error.response.data.errors
+      console.log(errors.value)
+    } else if (error?.response?.data?.message) {
+      errors.value = { general: error.response.data.message }
+    } else {
+      errors.value = { general: 'Une erreur inconnue est survenue.' }
+    }
   }
 }
 </script>
@@ -37,7 +52,7 @@ const handleLogin = async () => {
             placeholder="Email"
             class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <small v-if="errors.email" class="text-red-500 text-sm">
+          <small v-if="errors.email && errors.email.length > 0" class="text-red-500 text-sm">
             {{ errors.email[0] }}
           </small>
         </div>
@@ -54,7 +69,9 @@ const handleLogin = async () => {
             {{ errors.password[0] }}
           </small>
         </div>
-
+        <small v-if="errors.general" class="block text-red-500 text-sm text-center mb-2">
+          {{ errors.general }}
+        </small>
         <!-- Bouton de connexion -->
         <button
           type="submit"
