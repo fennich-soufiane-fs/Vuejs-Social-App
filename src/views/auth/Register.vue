@@ -111,6 +111,10 @@ const handleRegister = async () => {
           Create Account
         </button>
       </form>
+      <p class="mt-4 text-center">
+        Déjà un compte ? 
+        <router-link to="/login" class="text-blue-500 hover:text-blue-600">Se connecter</router-link>
+      </p>
     </div>
   </div>
 </template>
