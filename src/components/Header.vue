@@ -1,14 +1,24 @@
 <script setup>
 import { Settings, LogOut } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/AuthStore'
+import { toast } from 'vue3-toastify'
 
 const router = useRouter()
 const navigateTo = (path) => {
   router.push(path)
 }
 
-const logout = () => {
-  alert('logout')
+const authStore = useAuthStore()
+
+const logout = async () => {
+  try {
+    await authStore.logout()
+    toast.success('logout successfully')
+    router.push('/login')
+  } catch (error) {
+    throw error
+  }
 }
 </script>
 

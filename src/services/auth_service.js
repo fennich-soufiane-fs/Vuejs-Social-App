@@ -18,3 +18,7 @@ export function changePassword (data)
 {
     return http().post('auth/change-password', data)
 }
+export function logout ()
+{
+    return http().post('auth/logout')
+}

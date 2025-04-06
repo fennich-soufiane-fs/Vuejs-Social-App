@@ -1,4 +1,4 @@
-import { updateProfile,changePassword } from "@/services/auth_service";
+import { updateProfile,changePassword, logout } from "@/services/auth_service";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore('authStore', {
@@ -34,6 +34,15 @@ export const useAuthStore = defineStore('authStore', {
         async handleChangePassword (data) {
             try {
                 await changePassword(data)
+            } catch (error) {
+                throw error
+            }
+        },
+        async logout () {
+            try {
+                await logout()
+                this.user = {}
+                localStorage.removeItem('token')
             } catch (error) {
                 throw error
             }

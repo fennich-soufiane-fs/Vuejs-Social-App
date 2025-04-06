@@ -80,6 +80,10 @@ const handleLogin = async () => {
           Se connecter
         </button>
       </form>
+      <p class="mt-4 text-center">
+          Pas encore de compte ? 
+          <router-link to="/register" class="text-blue-500 hover:text-blue-600">S'inscrire</router-link>
+        </p>
     </div>
   </div>
 </template>
