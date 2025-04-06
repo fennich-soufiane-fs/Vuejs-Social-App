@@ -1,11 +1,9 @@
 <script setup>
-
+import Card from '@/components/Card.vue';
 </script>
 
 <template>
-    <div>
-        timeline
-    </div>
+    <Card />
 </template>
 
 
