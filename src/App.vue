@@ -2,7 +2,7 @@
 
 </script>
 
-<template>
+<template class="flex justify-center min-h-screen">
   <router-view />
 </template>
 

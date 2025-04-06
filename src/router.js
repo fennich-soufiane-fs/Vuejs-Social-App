@@ -4,6 +4,8 @@ import Register from './views/auth/Register.vue'
 import Login from './views/auth/Login.vue'
 import Home from './views/dashboard/Home.vue'
 import { useAuthStore } from './stores/AuthStore'
+import Timeline from './views/dashboard/Timeline.vue'
+import Settings from './views/dashboard/Settings.vue'
 
 
 const requireAuth = (to, from, next) => {
@@ -45,9 +47,21 @@ const router = createRouter({
       beforeEnter: redirectIfAuthenticated,
     },
     {
-      path: '/timeline',
+      path: '/',
       name: 'timeline',
       component: Home,
+      children: [
+        {
+          path: '/timeline',
+          name: 'dashboard.timeline',
+          component: Timeline
+        },
+        {
+          path: '/settings',
+          name: 'dashboard.settings',
+          component: Settings
+        }
+      ],
       beforeEnter: requireAuth,
     },
   ],

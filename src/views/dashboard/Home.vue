@@ -1,6 +1,12 @@
-<script setup></script>
-<template>
-  <div>gtgtgtgtgtttttttttttttttt</div>
-</template>
+<script setup>
+import Header from "@/components/Header.vue";
+</script>
 
-<style lang="scss" scoped></style>
+<template>
+	<div class="bg-gray-200 w-full md:w-[50%] flex flex-col mx-auto">
+		<Header />
+		<div class="py-4">
+			<router-view />
+		</div>
+	</div>
+</template>
