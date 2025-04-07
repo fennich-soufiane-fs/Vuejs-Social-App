@@ -1,6 +1,6 @@
 <script setup>
-import { useCounterStore } from '../stores/commonStore.js'
-const store = useCounterStore()
+import { useCommonStore } from '../stores/commonStore.js'
+const store = useCommonStore()
 </script>
 
 <template>
