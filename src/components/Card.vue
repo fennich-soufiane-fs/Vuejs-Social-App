@@ -3,6 +3,7 @@ import { ThumbsUp, MessageSquareDot, Share2 } from 'lucide-vue-next'
 const {post} = defineProps(['post'])
 import { useCommonStore } from '@/stores/commonStore';
 const commonStore = useCommonStore()
+import { timeAgo } from '@/composables/moment';
 </script>
 
 <template>
@@ -14,7 +15,7 @@ const commonStore = useCommonStore()
           </span>
           <div class="px-2 py-1 flex flex-col">
             <span class="font-semibold">{{post.text}}</span>
-            <span class="text-gray-400 text-sm">2h ago</span>
+            <span class="text-gray-400 text-sm">{{timeAgo(post.created_at)}}</span>
           </div>
         </div>
   
